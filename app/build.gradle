@@ -23,6 +23,16 @@ android {
         }
     }
 
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
+
     dexOptions {
         javaMaxHeapSize "4g"
     }
@@ -34,7 +44,6 @@ dependencies {
     compile project(':jokes')
     compile project(':jokeandroidlibrary')
     compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.google.android.gms:play-services:9.4.0'
     compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.android.support:multidex:1.0.1'
 
@@ -42,4 +51,6 @@ dependencies {
     androidTestCompile 'com.android.support:support-annotations:24.1.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
+
+    freeCompile 'com.google.android.gms:play-services:9.4.0'
 }
