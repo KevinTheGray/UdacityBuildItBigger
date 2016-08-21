@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import kevingray.jokeandroidlibrary.JokeDisplayerActivity;
@@ -14,10 +15,12 @@ import kevingray.jokeandroidlibrary.JokeDisplayerActivity;
 public class MainActivity extends ActionBarActivity implements JokeAsyncTask.JokeAsyncCallback {
 
   public String joke = null;
+  private ProgressBar spinner;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    spinner = (ProgressBar)findViewById(R.id.progressBar1);
   }
 
 
@@ -47,6 +50,7 @@ public class MainActivity extends ActionBarActivity implements JokeAsyncTask.Jok
     JokeAsyncTask jokeAsyncTask = new JokeAsyncTask();
     jokeAsyncTask.callback = this;
     jokeAsyncTask.execute();
+    spinner.setVisibility(View.VISIBLE);
   }
 
   public void presentJoke() {
@@ -66,11 +70,14 @@ public class MainActivity extends ActionBarActivity implements JokeAsyncTask.Jok
   @Override
   public void onJoke(String joke) {
     this.joke = joke;
+    spinner.setVisibility(View.INVISIBLE);
     presentJoke();
+
   }
 
   @Override
   public void onError(String errorMessage) {
+    spinner.setVisibility(View.INVISIBLE);
     presentError(errorMessage);
   }
 }
